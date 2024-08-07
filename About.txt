@@ -2,6 +2,14 @@ MVC projesini sıfırdan oluştur:
 
 dotnet new mvc -o IdentityApp 
 
+(Yukarıdaki kod hata veriyorse. Sadece web projesi açıp denenebilir: 
+ dotnet new web -o IdentityApp)
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Build ve Debug yani hata ayıklama için gerekli klasörlerin(.vscode) oluşturulması:
+
+CTRL + SHIFT + P
+
+.NET: Generate Assets for Build and Debug
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 Projeye Identity ekle(IdentityApp.csproj dosyasına konumlandıktan sonra):
 
@@ -60,7 +68,7 @@ dotnet ef migrations add InitialCreate --context IdentityContext
 Şimdi veritabanına aktarma zamanı. Bu kod ile migrations ile veritabaına aktarılır yalnız context belirtilmelidir 
 (Çünkü hem DbContext hem IdentityContext olacak prjedede):
 
-dotnet ef database update IdentityContext
+dotnet ef database update --context IdentityContext
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 

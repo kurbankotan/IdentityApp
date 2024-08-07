@@ -1,0 +1,70 @@
+MVC projesini sıfırdan oluştur:
+
+dotnet new mvc -o IdentityApp 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Projeye Identity ekle(IdentityApp.csproj dosyasına konumlandıktan sonra):
+
+dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+
+Komut çalıştırıldıktan sonra IdentityApp.csproj dosyasında Identity'nin eklendiğine dair satır görünür.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+SQLITE için Entity Framework'un eklenmesi:
+
+komut satırına bu yazılıp çalıştırılınca sqlite için entity framework eklenir(IdentityApp.csproj dosyasına konumlandıktan sonra):
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+
+
+Komut çalıştırıldıktan sonra IdentityApp.csproj dosyasında sqlite için entity framework'ün eklendiğine dair satır görünür.
+
+Şuan production değil development olduğundan(Properties klasörü altındaki launchSettings.json dosyasında development'da olduğumuz görülebilir
+daha sonra buraya production'da server bilgileri girilir) appsettings.Development.json dosyası altına bu satırları da ekleyelim ve 
+diğerlerinden virgül ile ayıralım:
+
+  "ConnectionStrings": {
+    "sql_connection": "Data Source=authDB.db"
+  }
+
+Ardından Program.cs dosyasında builder.Buld()'den hemen önce servisini eklememiz gerekiyor:
+
+builder.Services.AddDbContext<IdentityContext>(
+    options => options.UseSqlite(builder.Configuration["ConnectionStrings:sql_connection"]));
+
+Bundan sonra servis bir context olarak inject edilir.
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Daha sonra hemen altında User ve Role'leri kullanmak için bu service eklenir:
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+Daha sonra ef'yi kullanmak için Design paketini projeye yüklememiz lazım proje dizini içersine(IdentityApp.csproj'nin olduğu klasör) bu komut ile :
+
+dotnet add package Microsoft.EntityFrameworkCore.Design
+
+Bu komutun çalışmasından sonra IdentityApp.csproj dosyasında Design paketinin projeye kurulumunu gösteren kodun eklenmiş olduğunu göreceğiz
+----------------------------------------------------------------------------------
+Migrations yapılmadan önce test etmek için build edelim:
+
+dotnet build .\IdentityApp.csproj
+
+Burada başlangıç dosaysı belirtildi çünkü hem IdentityApp.csproj hem de IdentityApp.generated.sln dosyaları var ve biri seçilmeze hata verecektir.
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+Ardından bu değişikler için bir migrations oluşturulur. Komut satırına bu komut yazılır ve Identity Context'i baz alarak migrations oluşturulur:
+
+dotnet ef migrations add InitialCreate --context IdentityContext
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Şimdi veritabanına aktarma zamanı. Bu kod ile migrations ile veritabaına aktarılır yalnız context belirtilmelidir 
+(Çünkü hem DbContext hem IdentityContext olacak prjedede):
+
+dotnet ef database update IdentityContext
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+

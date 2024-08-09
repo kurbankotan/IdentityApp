@@ -25,7 +25,7 @@ namespace IdentityApp.Models
                 user = new AppUser{
                                     FullName = "Kurban KOTAN",
                                     UserName=adminUser, 
-                                    Email ="adim@kotan.com",
+                                    Email ="admin@kotan.com",
                                     PhoneNumber="05353553535"
                                    };
 

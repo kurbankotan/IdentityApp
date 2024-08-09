@@ -1,0 +1,44 @@
+﻿@model IdentityApp.ViewModels.EditViewModel
+
+<h2>Edit User</h2>
+<hr>
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input  type="hidden" name="Id" value="@Model.Id" >
+
+    <div class="mb-3">
+        <label asp-for="FullName" class="form-label">FullName</label>
+        <input asp-for="FullName" class="form-control">
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Email</label>
+        <input asp-for="Email" class="form-control">
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="card card-body">
+
+            <div class="card-header">
+                Parola Güncelle
+            </div>
+
+            <div class="card-body">
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label">Password</label>
+                        <input asp-for="Password" type="password" class="form-control">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+                        <input asp-for="ConfirmPassword" type="password" class="form-control">
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+             </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

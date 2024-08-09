@@ -12,7 +12,24 @@ builder.Services.AddDbContext<IdentityContext>(
     options => options.UseSqlite(builder.Configuration["ConnectionStrings:sql_connection"]));
 
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<IdentityContext>();   //AppUser yerine daha önce IdentityUser vardý. IdentityUser Microsoft'un tanýmladýðý
+                                                                                                //AppRole yerine daha önce IdentityRole vardý. IdentityRole Microsoft'un tanýmladýðý
+
+//Identiy'nin ayarlarýný deðiþtirmek için
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireDigit = false;
+
+    options.User.RequireUniqueEmail = true;
+    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+
+
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

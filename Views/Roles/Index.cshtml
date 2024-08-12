@@ -24,7 +24,7 @@
 
             <td>@role.Id</td>
             <td>@role.Name</td>
-            <td>Kullanıcı Listesi</td>
+            <td asp-role-users ="@role.Id"></td>
             <td>
                 <form method="post">
                     <a class="btn btn-primary btn-sm">Edit</a>

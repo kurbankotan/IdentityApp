@@ -7,7 +7,13 @@
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="mb-3">
-        <label asp-for="FullName" class="form-label">User Name</label>
+        <label asp-for="UserName" class="form-label">User Name</label>
+        <input asp-for="UserName" class="form-control">
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="FullName" class="form-label">FullName</label>
         <input asp-for="FullName" class="form-control">
         <span asp-validation-for="FullName" class="text-danger"></span>
     </div>

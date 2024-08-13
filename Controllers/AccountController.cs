@@ -24,6 +24,12 @@ namespace IdentityApp.Controllers
 
         public IActionResult Login()
         {
+            // Eğer kullanıcı zaten giriş yapmış ise, anasayfaya yönlendir.
+            if (_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -82,6 +88,12 @@ namespace IdentityApp.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            // Eğer kullanıcı zaten giriş yapmış ise, anasayfaya yönlendir.
+            if (_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -148,6 +160,21 @@ namespace IdentityApp.Controllers
             TempData["message"] = "Kullanıcı Bulunamadı";
             return View();
 
+        }
+
+
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login");
+        }
+
+
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
 

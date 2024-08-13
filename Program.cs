@@ -51,7 +51,8 @@ builder.Services.ConfigureApplicationCookie(options =>{
     options.AccessDeniedPath = "/Account/AccessDenied";  //Uygulamaya giriþ yapýldý ama girilen yerde yetkin yok uyarsý için bir sayfaya yönlendirme
     options.ExpireTimeSpan = TimeSpan.FromDays(30); //Cookie'nin expire süresi. Defatul 14 gün. FromMinutes(30) yapýlýrsa 30 dakika olur
     options.SlidingExpiration = true;  // 15. gün tekrar login olursa cookie'nin expire süresi yukarýda tanýmlandýðý gibi 30 gün olur tekrardan
-  
+
+    options.AccessDeniedPath = "/Account/AccessDenied"; // Yetkisi olmayan kullanýcýlarýn AccessDenied sayfasýna yönlendirilmesi
 }); 
 
 var app = builder.Build();

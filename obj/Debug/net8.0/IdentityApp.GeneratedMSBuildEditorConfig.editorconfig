@@ -18,6 +18,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\PC\OneDrive - duzce.edu.tr\Programlama Çalışmaları\Aspnet Core\IdentityApp
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/PC/OneDrive - duzce.edu.tr/Programlama Çalışmaları/Aspnet Core/IdentityApp/Views/Account/ConfirmEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDb25maXJtRW1haWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/OneDrive - duzce.edu.tr/Programlama Çalışmaları/Aspnet Core/IdentityApp/Views/Account/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/PC/OneDrive - duzce.edu.tr/Programlama Çalışmaları/Aspnet Core/IdentityApp/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -48,10 +56,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/PC/OneDrive - duzce.edu.tr/Programlama Çalışmaları/Aspnet Core/IdentityApp/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/PC/OneDrive - duzce.edu.tr/Programlama Çalışmaları/Aspnet Core/IdentityApp/Views/Users/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/PC/OneDrive - duzce.edu.tr/Programlama Çalışmaları/Aspnet Core/IdentityApp/Views/Users/Edit.cshtml]

@@ -72,7 +72,28 @@ dotnet ef database update --context IdentityContext
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Ücretsiz bir smtp mail servisi için
+www.brevo.com üzerinden üyelik oluşturulup bigiler (sağ üst köşede adınıza tıklayıp SMTP & API'ye tıkla)
+
+appsettings.Development.json dosyasında 
+
+  "EmailSender": {
+    "Host": "",
+    "Port": 587,
+    "EnableSLL": true,
+    "Username": "",
+    "Password": ""
+  }
 
 
+kısmında doldurulabilir. Doldurduktan sonra,:
+
+  "EmailSender": {
+    "Host": "smtp-relay.brevo.com",
+    "Port": 587,
+    "EnableSSL": true,
+    "Username": "7a46ca002@smtp-brevo.com",
+    "Password": "ZcBUb2SdnP96sz8F"
+  }
 
 

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace IdentityApp.Views.Users
+namespace IdentityApp.Views.Account
 {
     public class CreateModel : PageModel
     {

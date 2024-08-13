@@ -5,6 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.AddScoped<IEmailSender, SmtpEmailSender>(i=> new SmtpEmailSender(
+    builder.Configuration["EmailSender:Host"],
+    builder.Configuration.GetValue<int>("EmailSender:Port"),
+    builder.Configuration.GetValue<bool>("EmailSender:EnableSSL"),
+    builder.Configuration["EmailSender:Username"],
+    builder.Configuration["EmailSender:Password"]
+
+    ));
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -12,8 +22,8 @@ builder.Services.AddDbContext<IdentityContext>(
     options => options.UseSqlite(builder.Configuration["ConnectionStrings:sql_connection"]));
 
 
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<IdentityContext>();   //AppUser yerine daha önce IdentityUser vardý. IdentityUser Microsoft'un tanýmladýðý
-                                                                                                //AppRole yerine daha önce IdentityRole vardý. IdentityRole Microsoft'un tanýmladýðý
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();                //AppUser yerine daha önce IdentityUser vardý. IdentityUser Microsoft'un tanýmladýðý
+                                                                             //AddDefaultTokenProviders email token'ý için              //AppRole yerine daha önce IdentityRole vardý. IdentityRole Microsoft'un tanýmladýðý
 
 //Identiy'nin ayarlarýný deðiþtirmek için
 builder.Services.Configure<IdentityOptions>(options =>
@@ -29,6 +39,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5); //Yanlýþ þifre girdikten sonra hesap kitlenip, kullanýcý 5 dakika bekletilir yeni bir login iþlemi için
     options.Lockout.MaxFailedAccessAttempts = 3; //3 tane arka arkaya yanlýþ girilirse hesap kitlenir
+    options.SignIn.RequireConfirmedEmail = true;  // Hesap email onayýný aç
 
 });
 
@@ -40,7 +51,7 @@ builder.Services.ConfigureApplicationCookie(options =>{
     options.AccessDeniedPath = "/Account/AccessDenied";  //Uygulamaya giriþ yapýldý ama girilen yerde yetkin yok uyarsý için bir sayfaya yönlendirme
     options.ExpireTimeSpan = TimeSpan.FromDays(30); //Cookie'nin expire süresi. Defatul 14 gün. FromMinutes(30) yapýlýrsa 30 dakika olur
     options.SlidingExpiration = true;  // 15. gün tekrar login olursa cookie'nin expire süresi yukarýda tanýmlandýðý gibi 30 gün olur tekrardan
-    
+  
 }); 
 
 var app = builder.Build();
